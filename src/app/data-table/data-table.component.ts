@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { users } from "../../users-data"
 
 @Component({
   selector: "app-data-table",
@@ -7,7 +8,10 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class DataTableComponent implements OnInit {
   data = [];
+  users = users;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    return this.users;
+  }
 }
