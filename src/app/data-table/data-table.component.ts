@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { users } from "../../users-data"
+import { DataService } from '../data.service';
 
 @Component({
   selector: "app-data-table",
@@ -8,10 +8,9 @@ import { users } from "../../users-data"
 })
 export class DataTableComponent implements OnInit {
   data = [];
-  users = users;
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    return this.users;
+    return this.data = this.dataService.getUsersData();
   }
 }
