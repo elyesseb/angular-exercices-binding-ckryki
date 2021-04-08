@@ -8,7 +8,7 @@
 
     <h2>Mini App</h2>
 
-    <app-search-bar></app-search-bar>
+    <app-search-bar (eventRecupTexteInput)="afficherTexteInputRecu($event)"></app-search-bar>
     <app-filter-selector></app-filter-selector>
-    <app-data-table></app-data-table>
+    <app-data-table [dataUser]="data"></app-data-table>
 </div>

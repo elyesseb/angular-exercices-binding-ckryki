@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, VERSION } from "@angular/core";
+import { DataService } from "./data.service";
 
 @Component({
   selector: "my-app",
@@ -7,8 +8,23 @@ import { Component, OnInit } from "@angular/core";
 })
 export class AppComponent implements OnInit {
   yourName;
+  dataBrute;
+  data;
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataBrute = this.dataService.getUsersData();
+    this.data = this.dataBrute;
+  }
+
+  afficherTexteInputRecu(content: string) {
+    console.log("Contenu reçu : ", content);
+    this.data = this.dataBrute.filter(x =>
+      x.name.first.toLowerCase().includes(content.toLowerCase())
+    );
+    // Grâce au lowercaser le test est :
+    // Si dans le input j'ai 'ChiAra'
+    // chiara.includes(chiara)
+  }
 }

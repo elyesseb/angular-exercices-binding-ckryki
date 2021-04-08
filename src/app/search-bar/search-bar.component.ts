@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { DataService } from '../data.service';
 
 @Component({
   selector: "app-search-bar",
@@ -7,13 +6,14 @@ import { DataService } from '../data.service';
   styleUrls: ["./search-bar.component.css"]
 })
 export class SearchBarComponent implements OnInit {
-  data = [];
-  // @Output()
-  // new EventEmitter
-  constructor(private dataService: DataService) {}
+  @Output() eventRecupTexteInput = new EventEmitter<string>();
+  constructor() {}
 
-  ngOnInit() {
-    return this.data = this.dataService.getUsersData();
+  ngOnInit() {}
+
+  afficherTexteInput(monEvent: any) {
+    console.log(monEvent.target.value);
+    const inputContent = monEvent.target.value;
+    this.eventRecupTexteInput.emit(inputContent);
   }
-
 }
