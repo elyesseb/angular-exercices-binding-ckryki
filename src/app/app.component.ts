@@ -8,23 +8,36 @@ import { DataService } from "./data.service";
 })
 export class AppComponent implements OnInit {
   yourName;
-  dataBrute;
-  data;
+
+  userDataRaw = [];
+  userData = [];
+  paramFilter = "first";
+  searchHistory = "";
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataBrute = this.dataService.getUsersData();
-    this.data = this.dataBrute;
+    this.userData = this.userDataRaw = this.dataService.getUsersData();
   }
 
-  afficherTexteInputRecu(content: string) {
-    console.log("Contenu reçu : ", content);
-    this.data = this.dataBrute.filter(x =>
-      x.name.first.toLowerCase().includes(content.toLowerCase())
-    );
-    // Grâce au lowercaser le test est :
-    // Si dans le input j'ai 'ChiAra'
-    // chiara.includes(chiara)
+  filterData(searchString: string | null, byParam: string | null) {
+    searchString = searchString == null ? this.searchHistory : searchString;
+    this.searchHistory = searchString;
+
+    byParam = byParam || this.paramFilter;
+    this.paramFilter = byParam;
+
+    if (searchString == "") {
+      this.userData = [...this.userDataRaw];
+    } else {
+      this.userData = this.userDataRaw.filter(x =>
+        x.name[byParam].toLowerCase().includes(searchString.toLowerCase())
+      );
+
+      // user { name : 'jey', age : '29'}
+      // user['age'] ==> 29
+      // user['name'] ==> 'jey'
+      // user.name ==> 'jey'
+    }
   }
 }

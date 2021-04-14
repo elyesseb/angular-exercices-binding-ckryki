@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./data-table.component.css"]
 })
 export class DataTableComponent implements OnInit {
-  @Input() dataUser = [];
+  @Input() data;
   constructor() {}
 
   ngOnInit() {}
